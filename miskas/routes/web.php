@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController as A;
 use App\Http\Controllers\CalculatorController as C;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
