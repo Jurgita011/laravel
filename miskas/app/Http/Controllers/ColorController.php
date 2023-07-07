@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Color;
-//use App\Http\Controllers\Controller;
-//use App\Http\Requests\StoreColorRequest;
-//use App\Http\Requests\UpdateColorRequest;
 use Illuminate\Http\Request;
+
+
 class ColorController extends Controller
 {
     /**
@@ -28,7 +27,7 @@ class ColorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreColorRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -52,7 +51,7 @@ class ColorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateColorRequest $request, Color $color)
+    public function update(Request $request, Color $color)
     {
         //
     }
