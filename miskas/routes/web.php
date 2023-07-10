@@ -1,12 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController as A;
 use App\Http\Controllers\CalculatorController as C;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ColorController as R;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +20,7 @@ use App\Http\Controllers\ColorController as R;
 Route::get('/', function () {
     return view('welcome');
 });
+
 // trumpesnis uzrasymas: 'App\Http\Controllers\AnimalController' -> A::class
 
 Route::get('/animals', [A::class, 'animals']);
@@ -30,15 +29,17 @@ Route::get('/animals', [A::class, 'animals']);
 // {color?} - su klaustuku optional parametrai
 Route::get('/animals/racoon/{color?}', [A::class, 'racoon']);
 
+
+// Calculator
 Route::get('/calculator', [C::class, 'showCalculator'])->name('calculator');
 Route::post('/calculator', [C::class, 'doCalculator'])->name('do-calculator');
 
+// Route grupavimas
 Route::prefix('colors')->name('colors-')->group(function () {
-    Route::get('/', [R::class, 'index'])->name('index'); // GET /colors from URL:  colors Name: colors-index
-    Route::get('/create', [R::class, 'create'])->name('create'); // GET /colors/create from URL:  colors/create Name: colors-create
+    Route::get('/', [R::class, 'index'])->name('index'); // GET /colors from URL: colors Name: colors-index
+    Route::get('/create', [R::class, 'create'])->name('create'); // GET /colors/create from URL: colors/create Name: colors-create
+    Route::post('/', [R::class, 'store'])->name('store'); // POST /colors from URL:  colors Name: colors-store
 });
-
-
 
 
 
