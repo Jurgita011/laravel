@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController as A;
 use App\Http\Controllers\CalculatorController as C;
 use App\Http\Controllers\ColorController as R;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,6 @@ Route::prefix('colors')->name('colors-')->group(function () {
 
 
 
-// Auth::routes();
+ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

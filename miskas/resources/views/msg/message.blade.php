@@ -23,7 +23,7 @@
 @if(session()->has('warning'))
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-4">
             <div class="alert alert-warning" role="alert">
                 {{session()->get('warning')}}
             </div>
