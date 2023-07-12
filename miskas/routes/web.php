@@ -1,11 +1,9 @@
 <?php
 
-
-
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController as An;
 use App\Http\Controllers\CalculatorController as C;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ColorController as R;
 use App\Http\Controllers\AuthorController as A;
 
@@ -24,17 +22,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-// Route::get('/animals', ['App\Http\Controllers\AnimalController', 'index']);
+// trumpesnis uzrasymas: 'App\Http\Controllers\AnimalController' -> A::class
 
 Route::get('/animals', [An::class, 'animals']);
 
+// kai irasymas per parametra - kintamasis i {}
+// {color?} - su klaustuku optional parametrai
 Route::get('/animals/racoon/{color?}', [An::class, 'racoon']);
 
+
+// Calculator
 Route::get('/calculator', [C::class, 'showCalculator'])->name('calculator');
 Route::post('/calculator', [C::class, 'doCalculator'])->name('do-calculator');
 
-
+// Route grupavimas
 Route::prefix('colors')->name('colors-')->group(function () {
 
     Route::get('/', [R::class, 'index'])->name('index'); // GET /colors from URL:  colors Name: colors-index
@@ -47,6 +48,7 @@ Route::prefix('colors')->name('colors-')->group(function () {
 
 });
 
+// Autoriu crud
 Route::prefix('authors')->name('authors-')->group(function () {
 
     Route::get('/', [A::class, 'index'])->name('index');
@@ -59,8 +61,8 @@ Route::prefix('authors')->name('authors-')->group(function () {
 
 });
 
-
-
+// Login`as
 Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
