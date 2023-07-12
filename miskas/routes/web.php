@@ -1,11 +1,13 @@
 <?php
 
+
+
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnimalController as A;
+use App\Http\Controllers\AnimalController as An;
 use App\Http\Controllers\CalculatorController as C;
 use App\Http\Controllers\ColorController as R;
-use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\AuthorController as A;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +27,9 @@ Route::get('/', function () {
 
 // Route::get('/animals', ['App\Http\Controllers\AnimalController', 'index']);
 
-Route::get('/animals', [A::class, 'animals']);
+Route::get('/animals', [An::class, 'animals']);
 
-Route::get('/animals/racoon/{color?}', [A::class, 'racoon']);
+Route::get('/animals/racoon/{color?}', [An::class, 'racoon']);
 
 Route::get('/calculator', [C::class, 'showCalculator'])->name('calculator');
 Route::post('/calculator', [C::class, 'doCalculator'])->name('do-calculator');
@@ -45,8 +47,20 @@ Route::prefix('colors')->name('colors-')->group(function () {
 
 });
 
+Route::prefix('authors')->name('authors-')->group(function () {
+
+    Route::get('/', [A::class, 'index'])->name('index');
+    Route::get('/create', [A::class, 'create'])->name('create');
+    Route::post('/', [A::class, 'store'])->name('store');
+    Route::get('/delete/{author}', [A::class, 'delete'])->name('delete');
+    Route::delete('/{author}', [A::class, 'destroy'])->name('destroy');
+    Route::get('/edit/{author}', [A::class, 'edit'])->name('edit');
+    Route::put('/{author}', [A::class, 'update'])->name('update');
+
+});
 
 
- Auth::routes();
+
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
