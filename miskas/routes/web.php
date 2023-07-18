@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController as An;
 use App\Http\Controllers\CalculatorController as C;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ColorController as R;
 use App\Http\Controllers\AuthorController as A;
 use App\Http\Controllers\TagController as T;
@@ -23,20 +24,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// trumpesnis uzrasymas: 'App\Http\Controllers\AnimalController' -> A::class
+
+// Route::get('/animals', ['App\Http\Controllers\AnimalController', 'index']);
 
 Route::get('/animals', [An::class, 'animals']);
 
-// kai irasymas per parametra - kintamasis i {}
-// {color?} - su klaustuku optional parametrai
 Route::get('/animals/racoon/{color?}', [An::class, 'racoon']);
 
-
-// Calculator
 Route::get('/calculator', [C::class, 'showCalculator'])->name('calculator');
 Route::post('/calculator', [C::class, 'doCalculator'])->name('do-calculator');
 
-// Route grupavimas
+
 Route::prefix('colors')->name('colors-')->group(function () {
 
     Route::get('/', [R::class, 'index'])->name('index'); // GET /colors from URL:  colors Name: colors-index
@@ -49,7 +47,6 @@ Route::prefix('colors')->name('colors-')->group(function () {
 
 });
 
-// Autoriu crud
 Route::prefix('authors')->name('authors-')->group(function () {
 
     Route::get('/', [A::class, 'index'])->name('index');
@@ -60,7 +57,12 @@ Route::prefix('authors')->name('authors-')->group(function () {
     Route::get('/edit/{author}', [A::class, 'edit'])->name('edit');
     Route::put('/{author}', [A::class, 'update'])->name('update');
 
+    Route::post('/tags/{author}', [A::class, 'addTag'])->name('add-tag');
+    Route::delete('/tags/{author}/{tag}', [A::class, 'removeTag'])->name('remove-tag');
+    Route::post('/tags/create/{author}', [A::class, 'createTag'])->name('create-tag');
+
 });
+
 Route::prefix('tags')->name('tags-')->group(function () {
 
     Route::get('/', [T::class, 'index'])->name('index');
@@ -73,8 +75,8 @@ Route::prefix('tags')->name('tags-')->group(function () {
 
 });
 
-// Login`as
-Auth::routes();
 
+
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
