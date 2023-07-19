@@ -15,16 +15,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-       // $faker = Faker::create('lt_LT');
+        
         DB::table('users')->insert([
             'name' => 'Bebras',
             'email' => 'bebras@gmail.com',
             'password' => Hash::make('123'),
+            'role' => '1'
         ]);
         DB::table('users')->insert([
             'name' => 'Briedis',
             'email' => 'briedis@gmail.com',
             'password' => Hash::make('123'),
+            'role' => '100'
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Barsukas',
+            'email' => 'barsukas@gmail.com',
+            'password' => Hash::make('123'),
+            'role' => '20'
         ]);
 
         foreach (range(1, 20) as $_) {
@@ -47,6 +55,23 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+
+
+        foreach (range(1, 20) as $authorId) {
+
+            foreach (range(1, 30) as $tagId) {
+
+            if (!rand(0, 12)) {
+                DB::table('author_tags')->insert([
+                    'author_id' => $authorId,
+                    'tag_id' => $tagId
+                ]);
+            }
+
+        }
+
+
+        }
 
 
 
