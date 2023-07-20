@@ -1,4 +1,7 @@
+@inject('role', 'App\Services\RolesService')
+
 @extends('layouts.app')
+
 
 @section('content')
 <div class="container">
