@@ -1,5 +1,8 @@
 import './bootstrap';
-import tags from './tags';
+import Tags from './tags';
+import Messages from './messages';
+
+new Tags(new Messages());
 
 
-const t = new tags();
+//const t = new tags();
